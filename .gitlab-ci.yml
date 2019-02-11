@@ -1,0 +1,9 @@
+stages:
+  - build
+  
+build:
+  image: ibotdotout/python-opencv:latest
+  before_script:  
+    - apt-get update && apt-get install -y tesseract-ocr && apt-get install -y tesseract-ocr-eng
+  script:
+    - echo "started process done with docker image"
