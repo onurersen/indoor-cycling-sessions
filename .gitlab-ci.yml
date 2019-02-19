@@ -1,0 +1,12 @@
+before_script:  
+  - apt-get update -qq && apt-get install
+
+stages:
+  - build
+  
+build:
+  stage: build
+  image: beratto/python-tesseract:latest
+  before_script:  
+  script:
+    - echo "started process done with docker image"
