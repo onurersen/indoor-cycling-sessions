@@ -13,50 +13,56 @@ import numpy as np
 import pytesseract
 import sys
 import os
+import glob
+import shutil
 from PIL import Image
 
 def main():
     try:
 
-        folder = sys.argv[1]
-        files = [i for i in os.listdir(folder) if i.lower().endswith("enhanced.png")]
+        try:
+            os.makedirs("report")
+        except FileExistsError:
+            print("report directory already exists, emptying...")
+            shutil.rmtree("report", ignore_errors=True)
+            os.makedirs("report")
 
+        # takes session folder path as argument
+        if len(sys.argv) == 1:
+            folder = "enhanced"
+        else:
+            folder = sys.argv[1]
+
+        files = [i for i in os.listdir(folder) if i.lower().endswith("enhanced.png")]
         for file in files:
             existing_image_path = os.path.join(folder, file)
             # new_image_path = os.path.join(folder,os.path.splitext(file)[0] + "_enhanced" + os.path.splitext(file)[1])
-            extracted_text = get_string_from_text(existing_image_path,folder+"/")
-            f = open("session_info.txt", "a+")
+            extracted_text = get_string_from_text(existing_image_path, folder + "/")
+            report_file = open(os.path.join("report", "session_info.txt"), "a+")
             print(extracted_text)
-            f.write(extracted_text + "\n")
-            f.write("----------------------" + "\n")
-            f.close()
-                        
+            report_file.write(extracted_text + "\n")
+            report_file.write("----------------------" + "\n")
+            report_file.close()
+
+            for aux_file in glob.glob("*.png"):
+                os.remove(aux_file)
+
     except IOError:
         traceback.print_exc()
 
-def get_string_from_text(img_path,src_path):
+def get_string_from_text(input_img_path, input_folder):
     # Read image with opencv
-    img = cv2.imread(img_path)
-
-    # Convert to gray
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-    # Apply dilation and erosion to remove some noise
+    input_image = cv2.imread(input_img_path)
+    input_image = cv2.cvtColor(input_image, cv2.COLOR_BGR2GRAY)
     kernel = np.ones((1, 1), np.uint8)
-    img = cv2.dilate(img, kernel, iterations=1)
-    img = cv2.erode(img, kernel, iterations=1)
-
-    # Write image after removed noise
-    cv2.imwrite(src_path + "removed_noise.png", img)
-
-    # Write the image after apply opencv to do some ...
-    cv2.imwrite(src_path + "thres.png", img)
-    print(src_path + "thres.png")
-    # Recognize text with tesseract for python
-    result = pytesseract.image_to_string(Image.open(src_path + "thres.png"),config='-psm 6')
-
+    input_image = cv2.dilate(input_image, kernel, iterations=1)
+    input_image = cv2.erode(input_image, kernel, iterations=1)
+    cv2.imwrite(input_folder + "removed_noise.png", input_image)
+    cv2.imwrite(input_folder + "thres.png", input_image)
+    result = pytesseract.image_to_string(Image.open(input_folder + "thres.png"), config='-psm 6')
     text = "\n".join([ll.rstrip() for ll in result.splitlines() if ll.strip()])
     return text
 
 if __name__ == '__main__':
     main()
+
