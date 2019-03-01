@@ -1,0 +1,16 @@
+language: python
+python:
+  - "3.6.5"
+
+before_script:
+  - psql -c "create database test_expenses;" -U postgres
+  
+script: 
+  - echo "cloning repository into docker image..."
+  - cd script
+  - echo "cropping images..."
+  - python crop_session_images.py
+  - echo "enhancing images..."
+  - python enhance_image_contrast.py
+  - echo "extracting information from images..."
+  - python extract_session_info.py
