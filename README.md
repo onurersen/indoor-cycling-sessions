@@ -19,7 +19,7 @@ My favourite outdoor activities are running, biking, hiking, windsurfing, kite-s
 Lately, I began indoor cycling and found it very motivational.
 This is my personal automation project to analyze how far I'm going with my perfomance while i rock hard in indoor cycling classes.
 
-![alt text](https://onurersen.gitlab.io/img/indoorcycling/calories_burnt.png)
+![alt text](https://onurersen.gitlab.io/img/indoor-cycling-automation/charts/calories_burnt.png)
 
 **What technologies are in?**
 
