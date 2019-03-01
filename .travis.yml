@@ -4,22 +4,17 @@ python:
   - "3.6.5"
   
 env:
-  - OPENCV_LIB=https://github.com/opencv/opencv/archive/3.3.0.tar.gz
-  - OPENCV_LIB_VER=3.3.0
-  - PYPA_PIP=https://bootstrap.pypa.io/get-pip.py
   - CC=/usr/bin/clang
   - CXX=/usr/bin/clang++
-  - TESSERACT_TRAINED_DATA=https://raw.githubusercontent.com/tesseract-ocr/tessdata/master/eng.traineddata
   
 before_install:
-  - curl $PYPA_PIP | python3
-  - ln -s /usr/bin/python3 /usr/bin/python
-  - curl $TESSERACT_TRAINED_DATA -o /usr/share/tessdata/eng.traineddata 
+  - curl https://bootstrap.pypa.io/get-pip.py | python3
+  - curl https://raw.githubusercontent.com/tesseract-ocr/tessdata/master/eng.traineddata -o /usr/share/tessdata/eng.traineddata 
   - ln -s /usr/include/locale.h /usr/include/xlocale.h 
   - pip install -U --no-cache-dir Pillow pytesseract numpy
   - mkdir /opt && cd /opt && 
-  - curl -L $OPENCV_LIB | tar zx && 
-  - cd opencv-$OPENCV_LIB_VER && 
+  - curl -L https://github.com/opencv/opencv/archive/3.3.0.tar.gz | tar zx && 
+  - cd opencv-3.3.0 && 
   - mkdir build && cd build && 
   - cmake -G Ninja -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_FFMPEG=NO -D WITH_IPP=NO -D PYTHON_EXECUTABLE=/usr/bin/python -D WITH_OPENEXR=NO .. && 
   - cmake ninja
