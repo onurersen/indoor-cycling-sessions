@@ -6,26 +6,27 @@
 # version         : 1.0
 # usage           : python crop_session_images.py <folder_path>
 # notes           :
-# python_version  :3.6.5
+# python_version  : 3.6.5
 # ==============================================================================
 from PIL import Image
 import os
 import sys
 import shutil
+import traceback
 
 
 def main():
     try:
 
         try:
-            os.makedirs("cropped")
+            os.makedirs("../cropped")
         except FileExistsError:
             print("cropped directory already exists, emptying...")
-            shutil.rmtree("cropped", ignore_errors=True)
-
+            shutil.rmtree("../cropped", ignore_errors=True)
+            os.makedirs("../cropped")
         # takes session folder path as argument
         if len(sys.argv) == 1:
-            folder = "session"
+            folder = "../session"
         else:
             folder = sys.argv[1]
 
@@ -33,17 +34,17 @@ def main():
         # iterate over files and crop to appropriate image size
         for file in files:
             existing_image_path = os.path.join(folder, file)
-            new_image_path = os.path.join("cropped",
-                                          os.path.splitext(file)[0] + "_cropped" + os.path.splitext(file)[1])
-            print(new_image_path)
+            new_image_path = os.path.join("../cropped",
+                                          os.path.splitext(file)[0] + os.path.splitext(file)[1])
             img = Image.open(existing_image_path)
             (width, height) = img.size
-            area = (0, height / 4 + height / 15, width, height - (height / 15))
+            area = (0, height / 4 + height / 15, width, height - (height / 20))
             img = img.crop(area)
             img.save(new_image_path)
-
+            print(existing_image_path + " cropped.")
     except IOError:
         traceback.print_exc()
+
+
 if __name__ == '__main__':
     main()
-

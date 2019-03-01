@@ -6,43 +6,47 @@
 # version         : 1.0
 # usage           : python enhance_image_contrast.py <folder_path>
 # notes           :
-# python_version  :3.6.5
+# python_version  : 3.6.5
 # ==============================================================================
 from PIL import Image, ImageEnhance
+import traceback
 import os
 import sys
+import shutil
 
 
 def main():
     try:
 
         try:
-            os.makedirs("enhanced")
+            os.makedirs("../enhanced")
         except FileExistsError:
             print("cropped directory already exists, emptying...")
-            shutil.rmtree("enhanced", ignore_errors=True)
+            shutil.rmtree("../enhanced", ignore_errors=True)
+            os.makedirs("../enhanced")
 
         # takes session folder path as argument
         if len(sys.argv) == 1:
-            folder = "cropped"
+            folder = "../cropped"
         else:
             folder = sys.argv[1]
 
-        files = [i for i in os.listdir(folder) if i.lower().endswith("_cropped.png")]
+        files = [i for i in os.listdir(folder) if i.lower().endswith(".png")]
         for file in files:
             existing_image_path = os.path.join(folder, file)
-            new_image_path = os.path.join("enhanced",
-                                          os.path.splitext(file)[0] + "_enhanced" + os.path.splitext(file)[1])
+            new_image_path = os.path.join("../enhanced",
+                                          os.path.splitext(file)[0] + os.path.splitext(file)[1])
             image = Image.open(existing_image_path)
             enhancer = ImageEnhance.Contrast(image)
             enhanced_image = enhancer.enhance(4.0)
             enhanced_image.save(new_image_path)
-
+            print(existing_image_path + " enhanced.")
     except IOError:
         traceback.print_exc()
 
 
 if __name__ == '__main__':
     main()
+
 
 

@@ -1,48 +1,60 @@
-**Benefits of Indoor Cycling**
+[![Build Status](https://gitlab.com/onurersen/indoor-cycling-sessions/badges/master/build.svg)](https://gitlab.com/onurersen/indoor-cycling-sessions/commits/master) 
 
-The American College of Sports Medicine (ACSM) specifically mentions the following fitness benefits with regard to indoor cycling:
+**What... is this thing?**
 
-**1. Low Impact**
+A self-motivation project to exercise automation and devops for data i create on my own :construction_worker:
 
-Indoor cycling is a low-impact activity. 
-People recovering from orthopedic injuries often participate in indoor 
-cycling as part of the rehabilitation protocol. 
-If cycling is done correctly, there is minimal impact on the hip, 
-knee, and ankle joints. 
-A person, whether recovering from injury or not, avoids the pounding
-associated with other activities such as running.
+Once pipeline is run, following things happen:
 
-**2. Muscular Endurance**
+1. reading text from session images (located in session folder)
+1. plotting charts regarding that information extracted  
+1. publishing charts to onurersen.gitlab.io
 
-Muscular endurance refers to the ability of a muscle to 
-continually and repeatedly exert force over an extended period of time. 
-When you are pedaling against resistance in indoor cycling you increase 
-the endurance of the muscles in the legs to include the quadriceps,
-hamstrings, gluteus, and the calf muscles. Working these muscles also 
-helps to strengthen surrounding bones, tendons, 
-and ligaments increasing overall strength so that activities of daily 
-living can be performed with ease.
+**Why did i create such a thing?**
 
-**3. Stress Levels**
+I personally like doing activities indoor and outdoor.
 
-We’ve all heard about the runner's high. 
-An indoor cycling class can provide that same rush of adrenaline and 
-a release of happy mood-inducing neurotransmitters 
-known as endorphins. Endorphins tend to create feelings of euphoria,
-lower stress levels, and enhance the body's immune response.
+My favourite outdoor activities are running, biking, hiking, windsurfing, kite-surfing.
 
-**4. Cardiovascular**
+Lately, I began indoor cycling and found it very motivational.
+This is my personal automation project to analyze how far I'm going with my perfomance while i rock hard in indoor cycling classes.
 
-ACSM recommends that healthy adults should get at least 150 minutes 
-of moderate-intensity exercise per week. 
-Exercise recommendations can be achieved through 30-60 minutes of 
-moderate-intensity exercise (five days per week) or 
-20-60 minutes of vigorous-intensity exercise (three days per week). 
-An indoor cycling class can keep your heart rate 
-well within a vigorous range for approximately 45-60 minutes. 
-As with all continuous cardiovascular activity, 
-an indoor cycling program can help lower the risk of coronary artery disease.
+![alt text](https://onurersen.gitlab.io/img/indoorcycling/calories_burnt.png)
 
------
+**What technologies are in?**
 
-Content from @ https://www.lifespanfitness.com/uk/fitness/resources/articles/benefits-of-indoor-cycling
+Everything is done automatically inside python scripts.
+
+Only human interaction is pushing session image after each session.
+
+I use two self-built docker images/docker containers for stages during processing.
+* a container for data processing via python-teseract-opencv 
+* a container for visualization via matplotlib
+
+**A little more about indoor cycling...**
+
+When we talk about benefits of indoor cycling, there are many.
+
+Indoor cycling bike,the one and only tool, is very simple and easy for people those are already riding bike for fancy, sports etc.:bike:
+
+First things first...
+
+you have to sit in the correct riding position. :warning:
+Configure bike's saddle height, handlebar heigt and handlebar-saddle distance.
+
+**How 'bout benefits?**
+
+Indoor cycling decreases stress level if done correctly. 
+
+Assume you live in a metropolitan city, everything becomes a particular stress cause.
+
+At that point indoor cycling comes as a rehabilitating activity.
+You pump energy into you muscles with every ride.:muscle:
+Causes a significant increase in your endurance. Drip by drip, you raise your bar with every extra mile/km you ride, every extra minute you keep up 
+riding
+
+...and as a result calories burn :fire:
+
+Last but not least, it strengthens your :heart:
+
+For more information check [benefits of indoor cycling](https://www.lifespanfitness.com/uk/fitness/resources/articles/benefits-of-indoor-cycling).
