@@ -1,5 +1,3 @@
-[![Build Status](https://gitlab.com/onurersen/indoor-cycling-sessions/badges/master/build.svg)](https://gitlab.com/onurersen/indoor-cycling-sessions/commits/master) 
-
 **What... is this thing?**
 
 A self-motivation project to exercise automation and devops for data i create on my own :construction_worker:
